@@ -3,6 +3,7 @@
 'use strict';
 
 module.exports = wallaby => {
+    process.env.NODE_PATH = require('path').join(wallaby.localProjectDir, '../../node_modules');
     return {
         files: [
             { pattern: '.babelrc+(.js|)', instrument: false },
@@ -18,7 +19,7 @@ module.exports = wallaby => {
         ],
 
         compilers: {
-            '**/*.js': wallaby.compilers.babel(),
+            '**/*.js': wallaby.compilers.babel({babel: require('babel-core')}),
         },
 
         env: {
